@@ -6,11 +6,12 @@
 //
 
 import UIKit
+import Firebase
 
 class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     @IBOutlet weak var tableView: UITableView!
-    
+
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.backgroundColor = .clear
@@ -24,5 +25,13 @@ class TasksViewController: UIViewController, UITableViewDelegate, UITableViewDat
     }
     
     @IBAction func addButtonPressed(_ sender: UIBarButtonItem) {
+    }
+    @IBAction func signOutButtonPressed(_ sender: UIBarButtonItem) {
+        do {
+            try Auth.auth().signOut()
+        } catch {
+            print(error.localizedDescription)
+        }
+        dismiss(animated: true, completion: nil)
     }
 }

@@ -71,7 +71,6 @@
                                                 </state>
                                                 <connections>
                                                     <action selector="loginButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="zap-iF-kEi"/>
-                                                    <segue destination="oRo-Yq-aLb" kind="show" identifier="tasksSegue" id="4nh-iX-z5U"/>
                                                 </connections>
                                             </button>
                                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="dUd-7c-T0d">
@@ -112,14 +111,15 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="emailTextField" destination="xeA-Ez-gS1" id="vrv-4V-lww"/>
-                        <outlet property="passwordTextField" destination="xeA-Ez-gS1" id="LuC-eN-9yH"/>
+                        <outlet property="emailTextField" destination="lBN-dg-1hx" id="fXe-59-fVm"/>
+                        <outlet property="passwordTextField" destination="xeA-Ez-gS1" id="9f6-CA-r9x"/>
                         <outlet property="warnLabel" destination="8U8-5j-xyM" id="Cjf-zI-Bdv"/>
+                        <segue destination="oRo-Yq-aLb" kind="show" identifier="tasksSegue" id="uJo-1C-wwl"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="141" y="139"/>
+            <point key="canvasLocation" x="161" y="139"/>
         </scene>
         <!--Tasks-->
         <scene sceneID="sUG-xs-1SW">
@@ -160,6 +160,11 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Tasks" id="rFw-Bw-Lpo">
+                        <barButtonItem key="leftBarButtonItem" title="Sign Out" id="Vkc-Sa-neJ">
+                            <connections>
+                                <action selector="signOutButtonPressed:" destination="ivd-O5-1hU" id="lTB-6F-LYt"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="vTG-rQ-Rif">
                             <connections>
                                 <action selector="addButtonPressed:" destination="ivd-O5-1hU" id="hgJ-ZP-cwl"/>
@@ -172,16 +177,16 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="OWg-ag-hui" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="1697.1014492753625" y="138.61607142857142"/>
+            <point key="canvasLocation" x="1800" y="139"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="nwb-7G-PtY">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="oRo-Yq-aLb" sceneMemberID="viewController">
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" modalPresentationStyle="fullScreen" id="oRo-Yq-aLb" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="zmC-gj-xkV"/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="eW2-VP-j3M">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="56"/>
+                        <rect key="frame" x="0.0" y="44" width="414" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>
                     <nil name="viewControllers"/>
