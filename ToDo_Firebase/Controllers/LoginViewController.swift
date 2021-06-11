@@ -9,16 +9,20 @@ import UIKit
 import Firebase
 
 class LoginViewController: UIViewController {
+    let segueIdentifire = "tasksSegue"
+    var ref: DatabaseReference!
     
+//    MARK:- IBOutlets
     @IBOutlet weak var warnLabel: UILabel!
     @IBOutlet weak var emailTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
-    let segueIdentifire = "tasksSegue"
-    
+    //    MARK:- Controller life cycle
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // ссылка на базу данных users
+        ref = Database.database().reference(withPath: "users")
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidShow), name: UIResponder.keyboardDidShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardDidHide), name: UIResponder.keyboardDidHideNotification, object: nil)
         
@@ -31,6 +35,7 @@ class LoginViewController: UIViewController {
         }
     }
     
+
     // очистка полей после выхода из профиля
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -39,6 +44,7 @@ class LoginViewController: UIViewController {
         passwordTextField.text = ""
     }
     
+//    MARK:- Functions
     @objc func keyboardDidShow(notification: Notification) {
         guard let userInfo = notification.userInfo else { return }
         let keyboardFrameSize = (userInfo[UIResponder.keyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
@@ -61,6 +67,7 @@ class LoginViewController: UIViewController {
         }
     }
     
+//    MARK:- IBActions
     @IBAction func loginButtonPressed(_ sender: UIButton) {
         guard let email = emailTextField.text, let password = passwordTextField.text, email != "", password != "" else {
             displayWarningLabel(withText: "Info is incorrect")
@@ -86,16 +93,24 @@ class LoginViewController: UIViewController {
             return
         }
         
-        Auth.auth().createUser(withEmail: email, password: password) { (user, error) in
-            if error == nil {
-                if user != nil {
-                    self.performSegue(withIdentifier: self.segueIdentifire, sender: nil)
-                } else {
-                    print ("user is not created")
-                }
-            } else {
+        Auth.auth().createUser(withEmail: email, password: password) { [weak self] (user, error) in
+//            if error == nil {
+//                if user != nil {
+//                    self.performSegue(withIdentifier: self.segueIdentifire, sender: nil)
+//                } else {
+//                    print ("user is not created")
+//                }
+//            } else {
+//                print(error!.localizedDescription)
+//            }
+            
+            guard error == nil, user != nil else {
                 print(error!.localizedDescription)
+                return
             }
+            
+            let userRef = self?.ref.child((user?.user.uid)!)
+            userRef?.setValue(["email": user?.user.email])
         }
     }
 }
