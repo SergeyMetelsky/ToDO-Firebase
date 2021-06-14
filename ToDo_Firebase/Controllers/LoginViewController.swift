@@ -9,6 +9,8 @@ import UIKit
 import Firebase
 
 class LoginViewController: UIViewController {
+    
+//    MARK:- Properties
     let segueIdentifire = "tasksSegue"
     var ref: DatabaseReference!
     

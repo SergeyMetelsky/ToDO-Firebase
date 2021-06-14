@@ -22,7 +22,7 @@ struct Task {
         self.ref = nil
     }
     
-    // snapshot - когда храним каrие то данные в базе данных и хотим получить текущее значение наших данных то получаем snapshot (снимок, срез данных). Как бы получаем снимок данных на этот момент. Snapshot это и есть JSON
+    // snapshot - когда храним какие то данные в базе данных и хотим получить текущее значение наших данных то получаем snapshot (снимок/ срез данных). Как бы получаем снимок данных на этот момент. Snapshot это и есть JSON
     init(snapshot: DataSnapshot) {
         let snapshotValue = snapshot.value as! [String: AnyObject]
         title = snapshotValue["title"] as! String
@@ -32,6 +32,6 @@ struct Task {
      }
     
     func convertToDictionary() -> Any {
-        return ["title": title, "userId": userId, "comleted": completed]
+        return ["title": title, "userId": userId, "completed": completed]
     }
 }
